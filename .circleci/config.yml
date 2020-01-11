@@ -1,0 +1,44 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:8.16.1
+    steps:
+      - checkout
+
+      - run:
+          name: Setup env for web
+          command: echo ${FIREBASE_CONFIG} > packages/web/firebase.config.js && echo ${FACEBOOK_KEY} > packages/web/facebook.secret.js && ls packages/web
+
+      - run:
+          name: Setup env for server
+          command: echo ${TWITTER_KEY} > packages/server/src/twitter.secret.js && echo ${FACEBOOK_KEY} > packages/server/src/facebook.secret.js && echo ${SERVICE_ACCOUNT} > packages/server/src/service.account.json
+
+
+      - run:
+          name: Install Node modules
+          command: yarn
+
+      - run:
+          name: Build Server app
+          command:  mkdir -p packages/server/build && cp packages/server/src/{service.account.json,facebook.secret.js,twitter.secret.js} packages/server/build && cd packages/server && yarn build:ci && node scripts/nodeEngine.js
+
+      - run:
+          name: Build Web app
+          command: cd packages/web && yarn build
+
+      - run: 
+          name: Deploy to Firebase
+          command:  yarn deploy
+
+workflows:
+  version: 2
+  soshoapp-pipeline:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - master
+                - develop

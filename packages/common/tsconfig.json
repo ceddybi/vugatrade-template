@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "es2015",
+    "moduleResolution": "node",
+    "rootDir": "src",
+    "outDir": "dist",
+    "declaration": true,
+    "esModuleInterop": true,
+    "lib": [
+      "es6",
+      "esnext"
+    ],
+    "allowUnusedLabels": true,
+    "allowJs": true,
+  },
+  "exclude": [
+    "dist",
+    "*/**/*test.ts",
+    "node_modules",
+  ]
+}

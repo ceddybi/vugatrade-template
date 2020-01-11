@@ -1,0 +1,30 @@
+{
+    "name": "@vugatrade/notebooks",
+    "version": "0.0.1",
+    "main": "dist/index.js",
+    "typings": "dist/index.d.ts",
+    "license": "MIT",
+    "devDependencies": {
+        "@types/node": "^12.12.7",
+        "types": "^0.1.1",
+        "typescript": "^3.7.2"
+    },
+    "scripts": {
+        "build": "tsc --skipLibCheck",
+        "build:watch": "tsc --watch --skipLibCheck",
+        "test": "ava src/index.test.ts"
+    },
+    "dependencies": {
+        "lodash": "^4.17.15"
+    },
+    "ava": {
+        "verbose": true,
+        "compileEnhancements": false,
+        "extensions": [
+          "ts"
+        ],
+        "require": [
+          "ts-node/register"
+        ]
+      }
+}

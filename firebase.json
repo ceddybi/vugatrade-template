@@ -1,0 +1,11 @@
+{
+    "hosting": {
+        "cleanUrls": true,
+        "public": "packages/web/out",
+        "site": "vugatrade",
+        "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
+    },
+    "functions": {
+        "source": "packages/ibkr/build"
+    }
+}
